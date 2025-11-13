@@ -68,3 +68,51 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Essential Git Workflow Commands
+
+### Complete Git Flow (10 Essential Commands)
+
+```bash
+# 1. Check current status
+git status
+
+# 2. Create and switch to a new branch
+git checkout -b feature/new-feature
+
+# 3. Add changes to staging area
+git add .
+
+# 4. Commit changes with a message
+git commit -m "Add new feature"
+
+# 5. Pull latest changes from main branch
+git pull origin main
+
+# 6. Push your branch to remote
+git push origin feature/new-feature
+
+# 7. Switch back to main branch
+git checkout main
+
+# 8. Pull latest changes to main
+git pull origin main
+
+# 9. Merge your feature branch into main
+git merge feature/new-feature
+
+# 10. Push merged changes to remote
+git push origin main
+```
+
+### Bonus: Useful Additional Commands
+```bash
+# View commit history
+git log --oneline
+
+# Undo last commit (keep changes)
+git reset --soft HEAD~1
+
+# Delete a branch after merging
+git branch -d feature/new-feature
+```
