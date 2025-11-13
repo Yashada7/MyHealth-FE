@@ -1,0 +1,175 @@
+.appointments-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.appointments-header {
+  background: white;
+  padding: 20px 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appointments-header h1 {
+  color: #667eea;
+  margin: 0;
+}
+
+.btn-back {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-back:hover {
+  background: #5568d3;
+}
+
+.appointments-content {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.btn-new-appointment {
+  padding: 15px 30px;
+  background: #10ac84;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.btn-new-appointment:hover {
+  background: #0e9c74;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appointment-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #667eea;
+}
+
+.appointment-card.completed {
+  border-left-color: #95a5a6;
+  opacity: 0.8;
+}
+
+.appointment-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.doctor-info h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.specialty {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.appointment-details {
+  text-align: right;
+}
+
+.date-time {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.upcoming {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-badge.completed {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.appointment-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-reschedule,
+.btn-cancel,
+.btn-view-notes {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-reschedule {
+  background: #667eea;
+  color: white;
+}
+
+.btn-reschedule:hover {
+  background: #5568d3;
+}
+
+.btn-cancel {
+  background: #ff4757;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #ee5a6f;
+}
+
+.btn-view-notes {
+  background: #e8eaf6;
+  color: #667eea;
+}
+
+.btn-view-notes:hover {
+  background: #d1d5f0;
+}
+
+@media (max-width: 768px) {
+  .appointment-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .appointment-details {
+    text-align: left;
+  }
+}
