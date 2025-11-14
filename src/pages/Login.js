@@ -4,15 +4,27 @@ import './Login.css';
 function Login({ onNavigate, onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userRole, setUserRole] = useState('patient'); // Default to patient
+
+  // Test credentials
+  const TEST_PATIENT_EMAIL = 'patient@myhealth.com';
+  const TEST_DOCTOR_EMAIL = 'doctor@myhealth.com';
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Determine role based on email
+    let userRole = 'patient'; // Default role
+    if (email === TEST_DOCTOR_EMAIL) {
+      userRole = 'doctor';
+    } else if (email === TEST_PATIENT_EMAIL) {
+      userRole = 'patient';
+    }
+    
     console.log('Login attempt:', { email, password, role: userRole });
     
     // Simulate successful login
     if (email && password) {
-      onLogin(userRole); // Pass the selected role to App
+      onLogin(userRole); // Pass the determined role to App
     }
   };
 
@@ -22,19 +34,6 @@ function Login({ onNavigate, onLogin }) {
         <h1>MyHealth ❤️</h1>
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="role">Login as</label>
-            <select
-              id="role"
-              value={userRole}
-              onChange={(e) => setUserRole(e.target.value)}
-              className="form-control"
-              required
-            >
-              <option value="patient">Patient</option>
-              <option value="doctor">Doctor</option>
-            </select>
-          </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
