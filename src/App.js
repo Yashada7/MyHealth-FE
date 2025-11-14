@@ -4,8 +4,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
-import Appointments from './pages/Appointments';
+import DoctorAppointments from './pages/DoctorAppointments';
 import Profile from './pages/Profile';
+import PatientAppointments from './pages/PatientAppointments';
+import Header from './components/Header';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -20,8 +22,10 @@ function App() {
         return <Dashboard setCurrentPage={setCurrentPage} />;
       case 'health-records':
         return <HealthRecords setCurrentPage={setCurrentPage} />;
-      case 'appointments':
-        return <Appointments setCurrentPage={setCurrentPage} />;
+      case 'doctor-appointments':
+        return <DoctorAppointments setCurrentPage={setCurrentPage} />;
+      case 'patient-appointments':
+        return <PatientAppointments setCurrentPage={setCurrentPage} />;
       case 'profile':
         return <Profile setCurrentPage={setCurrentPage} />;
       default:
@@ -31,6 +35,12 @@ function App() {
 
   return (
     <div className="App">
+      
+      {/* Show header on all pages EXCEPT login & register */}
+      {currentPage !== "login" && currentPage !== "register" && (
+        <Header setCurrentPage={setCurrentPage} />
+      )}
+
       {renderPage()}
       
       {/* Simple Navigation for Demo - Remove in production */}
@@ -44,7 +54,7 @@ function App() {
         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
         zIndex: 1000
       }}>
-        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '12px' }}>Navigation (Demo)</p>
+        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '12px' }}>Navigation</p>
         <select 
           value={currentPage} 
           onChange={(e) => setCurrentPage(e.target.value)}
@@ -59,7 +69,8 @@ function App() {
           <option value="register">Register</option>
           <option value="dashboard">Dashboard</option>
           <option value="health-records">Health Records</option>
-          <option value="appointments">Appointments</option>
+          <option value="doctor-appointments">Doctor Appointments (Patient View)</option>
+          <option value="patient-appointments">Patient Appointments (Doctor View)</option>
           <option value="profile">Profile</option>
         </select>
       </div>
