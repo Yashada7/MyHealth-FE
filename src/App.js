@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
 import Appointments from './pages/Appointments';
 import Profile from './pages/Profile';
+import DoctorAvailability from './pages/DoctorAvailability';
+import ManageProfile from './pages/ManageProfile';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -24,6 +26,10 @@ function App() {
         return <Appointments setCurrentPage={setCurrentPage} />;
       case 'profile':
         return <Profile />;
+        case 'doctor-availability':
+          return <DoctorAvailability />;
+        case 'manage-profile':
+          return <ManageProfile />;
       default:
         return <Login />;
     }
