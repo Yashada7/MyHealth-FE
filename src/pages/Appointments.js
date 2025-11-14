@@ -10,10 +10,10 @@ function Appointments() {
 
   return (
     <div className="appointments-container">
-      <header className="appointments-header">
+      {/* <header className="appointments-header">
         <h1>My Appointments</h1>
         <button className="btn-back">← Back to Dashboard</button>
-      </header>
+      </header> */}
 
       <div className="appointments-content">
         <button className="btn-new-appointment">+ Book New Appointment</button>

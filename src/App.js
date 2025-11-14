@@ -6,9 +6,6 @@ import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
 import Appointments from './pages/Appointments';
 import Profile from './pages/Profile';
-import DoctorAvailability from './pages/DoctorAvailability';
-import ManageProfile from './pages/ManageProfile';
-
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -16,29 +13,30 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'login':
-        return <Login />;
+        return <Login setCurrentPage={setCurrentPage} />;
       case 'register':
-        return <Register />;
+        return <Register setCurrentPage={setCurrentPage} />;
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard setCurrentPage={setCurrentPage} />;
       case 'health-records':
-        return <HealthRecords />;
+        return <HealthRecords setCurrentPage={setCurrentPage} />;
       case 'appointments':
-        return <Appointments />;
+        return <Appointments setCurrentPage={setCurrentPage} />;
       case 'profile':
         return <Profile />;
-      case 'doctor-availability':
-        return <DoctorAvailability />;
-      case 'manage-profile':
-        return <ManageProfile />;
       default:
         return <Login />;
-
     }
   };
 
   return (
     <div className="App">
+      
+      {/* Show header on all pages EXCEPT login & register */}
+      {currentPage !== "login" && currentPage !== "register" && (
+        <Header setCurrentPage={setCurrentPage} />
+      )}
+
       {renderPage()}
       
       {/* Simple Navigation for Demo - Remove in production */}
@@ -69,8 +67,6 @@ function App() {
           <option value="health-records">Health Records</option>
           <option value="appointments">Appointments</option>
           <option value="profile">Profile</option>
-          <option value="doctor-availability">Doctor Availability</option>
-          <option value="manage-profile">Manage Profile</option>
         </select>
       </div>
     </div>
