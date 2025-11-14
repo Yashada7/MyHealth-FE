@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Appointments.css';
 
-function Appointments() {
+function Appointments({ onLogout }) {
+  const navigate = useNavigate();
   const [appointments] = useState([
     { id: 1, doctor: 'Dr. Sarah Smith', specialty: 'Cardiologist', date: '2025-11-15', time: '10:00 AM', status: 'Upcoming' },
     { id: 2, doctor: 'Dr. John Johnson', specialty: 'General Physician', date: '2025-11-20', time: '02:30 PM', status: 'Upcoming' },
@@ -12,7 +14,7 @@ function Appointments() {
     <div className="appointments-container">
       <header className="appointments-header">
         <h1>My Appointments</h1>
-        <button className="btn-back">← Back to Dashboard</button>
+        <button className="btn-back" onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
       </header>
 
       <div className="appointments-content">

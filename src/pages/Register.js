@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
-function Register({ onNavigate }) {
+function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,20 +33,18 @@ function Register({ onNavigate }) {
     console.log('Register attempt:', formData);
     
     // Show success message
-    setSuccessMessage('Account created successfully! Redirecting to dashboard...');
+    setSuccessMessage('Account created successfully! Redirecting to login...');
     
-    // Redirect to dashboard after 2 seconds
+    // Redirect to login after 2 seconds
     setTimeout(() => {
-      if (onNavigate) {
-        onNavigate('dashboard');
-      }
+      navigate('/login');
     }, 2000);
   };
 
   return (
     <div className="register-container">
       <div className="register-card">
-        <h1>MyHealth</h1>
+        <h1>MyHealth ❤️</h1>
         <h2>Create Account</h2>
         
         {successMessage && (
@@ -130,7 +130,7 @@ function Register({ onNavigate }) {
           <button type="submit" className="btn-primary">Sign Up</button>
         </form>
         <p className="login-link">
-          Already have an account? <a href="#login" onClick={(e) => { e.preventDefault(); if(onNavigate) onNavigate('login'); }}>Login</a>
+          Already have an account? <a href="#login" onClick={(e) => { e.preventDefault(); navigate('/login'); }}>Login</a>
         </p>
       </div>
     </div>

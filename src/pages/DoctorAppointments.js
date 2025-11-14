@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './DoctorAppointments.css';
 import { appointmentsData } from '../data/appointmentsData';
 
-function DoctorAppointments({ onNavigate, onLogout }) {
+function DoctorAppointments({ onLogout }) {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('appointments'); // 'appointments' or 'availability'
   const [appointments, setAppointments] = useState(appointmentsData);
   const [selectedDate, setSelectedDate] = useState('');
@@ -158,7 +160,10 @@ function DoctorAppointments({ onNavigate, onLogout }) {
           <h1>Doctor Dashboard</h1>
           <div className="header-right">
             <span className="doctor-name">Dr. Sarah Smith</span>
-            <button className="btn-logout" onClick={() => onLogout ? onLogout() : onNavigate('login')}>
+            <button className="btn-logout" onClick={() => {
+              if (onLogout) onLogout();
+              navigate('/login');
+            }}>
               Logout
             </button>
           </div>

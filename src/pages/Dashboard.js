@@ -1,12 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
-function Dashboard() {
+function Dashboard({ onLogout }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate('/login');
+  };
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
         <h1>MyHealth Dashboard</h1>
-        <button className="btn-logout">Logout</button>
+        <button className="btn-logout" onClick={handleLogout}>Logout</button>
       </header>
       
       <div className="dashboard-content">

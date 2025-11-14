@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 
-function Profile() {
+function Profile({ onLogout, userRole }) {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     name: 'John Doe',
     email: 'john.doe@example.com',
@@ -31,7 +33,7 @@ function Profile() {
     <div className="profile-container">
       <header className="profile-header">
         <h1>My Profile</h1>
-        <button className="btn-back">← Back to Dashboard</button>
+        <button className="btn-back" onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
       </header>
 
       <div className="profile-content">

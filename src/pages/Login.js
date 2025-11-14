@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-function Login({ onNavigate, onLogin }) {
+function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   // Test credentials
   const TEST_PATIENT_EMAIL = 'patient@myhealth.com';
@@ -25,6 +27,7 @@ function Login({ onNavigate, onLogin }) {
     // Simulate successful login
     if (email && password) {
       onLogin(userRole); // Pass the determined role to App
+      navigate('/dashboard'); // Redirect to dashboard
     }
   };
 
@@ -59,7 +62,7 @@ function Login({ onNavigate, onLogin }) {
           <button type="submit" className="btn-primary">Login</button>
         </form>
         <p className="signup-link">
-          Don't have an account? <a href="#register" onClick={(e) => { e.preventDefault(); onNavigate('register'); }}>Sign up</a>
+          Don't have an account? <a href="#register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>Sign up</a>
         </p>
       </div>
     </div>
