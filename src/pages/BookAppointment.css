@@ -1,0 +1,105 @@
+.doctor-availability-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, grey 100%);
+  padding: 40px 20px;
+}
+
+.availability-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.availability-header h1 { margin: 0; color: #333; font-size: 28px }
+.btn-back { padding: 10px 16px; border-radius: 8px; background: black; color: white; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease }
+.btn-back:hover { background: black; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4) }
+
+.availability-content { max-width: 900px; margin: 0 auto; background: white; padding: 32px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08) }
+.form-row { margin-bottom: 28px }
+.form-row:last-child { margin-bottom: 0 }
+.form-row label { display: block; margin-bottom: 12px; font-weight: 700; color: #333; font-size: 15px; letter-spacing: 0.5px }
+.form-row select, .form-row input { padding: 12px 14px; border: 2px solid white; border-radius: 8px; width: 100%; box-sizing: border-box; font-size: 14px; transition: all 0.2s ease; background: #fafbfc }
+.form-row select:focus, .form-row input:focus { outline: none; border-color: black; background: white; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) }
+
+.dates-list, .times-list { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px }
+.date-btn, .time-btn { padding: 10px 14px; border-radius: 8px; border: 2px solid white; background: white; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s ease; color: #555 }
+.date-btn:hover, .time-btn:hover { border-color: black; background: #f3f5fb }
+.date-btn.active, .time-btn.active { background: black; color: white; border-color: black; box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3) }
+
+/* Calendar styles */
+.calendar { border: 2px solid #e8ecf1; padding: 18px; border-radius: 10px; background: #fafbfc }
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 12px }
+.cal-nav { background: white; border: 2px solid white; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center }
+.cal-nav:hover { border-color: black; background: #f3f5fb; color: black }
+.month-label { font-weight: 700; font-size: 16px; color: #333; flex: 1; text-align: center }
+.weekday-row { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; color: #888; font-size: 11px; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px }
+.calendar-cell { height: 64px; border-radius: 8px; background: white; border: 2px solid #e8ecf1; display: flex; align-items: flex-start; justify-content: flex-end; padding: 8px; cursor: default; transition: all 0.2s ease; font-weight: 500 }
+.calendar-cell .date-number { font-size: 14px; color: #333 }
+.calendar-cell.out-of-month { opacity: 0.3; background: #f5f7fa }
+.calendar-cell.disabled { background: #f5f7fa; color: #ccc; cursor: not-allowed; border-color: #e8ecf1 }
+.calendar-cell.available { border: 2px solid #a8c5ff; background: #f0f4ff; cursor: pointer }
+.calendar-cell.available:hover { border-color: black; background: #e8f0ff; box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2) }
+.calendar-cell.available .date-number { color: black }
+.calendar-cell.selected { background: black; color: white; border-color: black; box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4) }
+.calendar-cell.selected .date-number { color: white }
+
+.btn-book { padding: 12px 24px; background: linear-gradient(135deg, #10ac84 0%, #0d8a68 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(16, 172, 132, 0.3) }
+.btn-book:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(16, 172, 132, 0.4) }
+.btn-book:active { transform: translateY(0) }
+
+.success-alert { margin-top: 20px; padding: 16px 18px; background: linear-gradient(135deg, #10ac84 0%, #0d8a68 100%); color: white; border-radius: 8px; font-weight: 500; box-shadow: 0 4px 12px rgba(16, 172, 132, 0.3); animation: slideIn 0.3s ease }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .availability-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 24px;
+  }
+
+  .availability-header h1 {
+    font-size: 22px;
+  }
+
+  .btn-back {
+    width: 100%;
+  }
+
+  .availability-content {
+    padding: 24px 16px;
+  }
+
+  .calendar-grid {
+    gap: 6px;
+  }
+
+  .calendar-cell {
+    height: 52px;
+    font-size: 12px;
+  }
+
+  .dates-list, .times-list {
+    gap: 8px;
+  }
+
+  .date-btn, .time-btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}

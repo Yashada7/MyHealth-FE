@@ -185,12 +185,12 @@
 }
 
 .btn-view-notes {
-  background: #e8eaf6;
-  color: #667eea;
+  background: black;
+  color: white;
 }
 
 .btn-view-notes:hover {
-  background: #d1d5f0;
+  background: black;
 }
 
 @media (max-width: 768px) {
@@ -305,7 +305,7 @@
   background: #f5f7fa;
   padding: 10px;
   border-radius: 6px;
-  border-left: 3px solid #667eea;
+  border-left: 3px solid black;
   margin: 8px 0 !important;
   color: #555;
 }

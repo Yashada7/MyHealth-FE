@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
 import DoctorAppointments from './pages/DoctorAppointments';
+import BookAppointment from './pages/BookAppointment';
 import Profile from './pages/Profile';
 import PatientAppointments from './pages/PatientAppointments';
 import Header from './components/Header';
@@ -24,6 +25,8 @@ function App() {
         return <HealthRecords setCurrentPage={setCurrentPage} />;
       case 'doctor-appointments':
         return <DoctorAppointments setCurrentPage={setCurrentPage} />;
+      case 'book-appointment':
+        return <BookAppointment setCurrentPage={setCurrentPage} />;
       case 'patient-appointments':
         return <PatientAppointments setCurrentPage={setCurrentPage} />;
       case 'profile':
@@ -69,6 +72,7 @@ function App() {
           <option value="register">Register</option>
           <option value="dashboard">Dashboard</option>
           <option value="health-records">Health Records</option>
+          <option value="book-appointment">Book Appointment</option>
           <option value="doctor-appointments">Doctor Appointments (Patient View)</option>
           <option value="patient-appointments">Patient Appointments (Doctor View)</option>
           <option value="profile">Profile</option>
