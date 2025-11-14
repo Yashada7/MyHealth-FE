@@ -1,20 +1,37 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-function Login() {
+function Login({ onNavigate, onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Test credentials
+  const TEST_PATIENT_EMAIL = 'patient@myhealth.com';
+  const TEST_DOCTOR_EMAIL = 'doctor@myhealth.com';
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password });
-    // Add login logic here
+    
+    // Determine role based on email
+    let userRole = 'patient'; // Default role
+    if (email === TEST_DOCTOR_EMAIL) {
+      userRole = 'doctor';
+    } else if (email === TEST_PATIENT_EMAIL) {
+      userRole = 'patient';
+    }
+    
+    console.log('Login attempt:', { email, password, role: userRole });
+    
+    // Simulate successful login
+    if (email && password) {
+      onLogin(userRole); // Pass the determined role to App
+    }
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1>MyHealth</h1>
+        <h1>MyHealth ❤️</h1>
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -42,7 +59,7 @@ function Login() {
           <button type="submit" className="btn-primary">Login</button>
         </form>
         <p className="signup-link">
-          Don't have an account? <a href="#register">Sign up</a>
+          Don't have an account? <a href="#register" onClick={(e) => { e.preventDefault(); onNavigate('register'); }}>Sign up</a>
         </p>
       </div>
     </div>

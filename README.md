@@ -116,3 +116,9 @@ git reset --soft HEAD~1
 # Delete a branch after merging
 git branch -d feature/new-feature
 ```
+
+
+```
+Use patient@myhealth.com for Patient or doctor@myhealth.com for Doctor
+ remove this description 
+```
