@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import './Register.css';
 
-function Register() {
+function Register({ onNavigate }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    phone: '',
+    dateOfBirth: ''
   });
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -18,8 +21,24 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
     console.log('Register attempt:', formData);
-    // Add registration logic here
+    
+    // Show success message
+    setSuccessMessage('Account created successfully! Redirecting to dashboard...');
+    
+    // Redirect to dashboard after 2 seconds
+    setTimeout(() => {
+      if (onNavigate) {
+        onNavigate('dashboard');
+      }
+    }, 2000);
   };
 
   return (
@@ -27,6 +46,13 @@ function Register() {
       <div className="register-card">
         <h1>MyHealth</h1>
         <h2>Create Account</h2>
+        
+        {successMessage && (
+          <div className="success-message">
+            ✓ {successMessage}
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
@@ -36,7 +62,7 @@ function Register() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your full name"
+              placeholder="e.g., John Doe"
               required
             />
           </div>
@@ -53,6 +79,29 @@ function Register() {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="e.g., +1 234 567 8900"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="dateOfBirth">Date of Birth</label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -62,6 +111,7 @@ function Register() {
               onChange={handleChange}
               placeholder="Enter your password"
               required
+              minLength="6"
             />
           </div>
           <div className="form-group">
@@ -74,12 +124,13 @@ function Register() {
               onChange={handleChange}
               placeholder="Confirm your password"
               required
+              minLength="6"
             />
           </div>
           <button type="submit" className="btn-primary">Sign Up</button>
         </form>
         <p className="login-link">
-          Already have an account? <a href="#login">Login</a>
+          Already have an account? <a href="#login" onClick={(e) => { e.preventDefault(); if(onNavigate) onNavigate('login'); }}>Login</a>
         </p>
       </div>
     </div>

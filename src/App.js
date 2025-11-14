@@ -6,26 +6,69 @@ import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
 import Appointments from './pages/Appointments';
 import Profile from './pages/Profile';
+import DoctorAppointments from './pages/DoctorAppointments';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
+  const [userRole, setUserRole] = useState(null); // 'patient' or 'doctor'
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Handle login with role
+  const handleLogin = (role) => {
+    setUserRole(role);
+    setIsAuthenticated(true);
+    if (role === 'doctor') {
+      setCurrentPage('doctor-appointments');
+    } else {
+      setCurrentPage('dashboard');
+    }
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    setUserRole(null);
+    setIsAuthenticated(false);
+    setCurrentPage('login');
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'login':
-        return <Login />;
+        return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
       case 'register':
-        return <Register />;
+        return <Register onNavigate={setCurrentPage} />;
+      
+      // Pages accessible by both patients and doctors
       case 'dashboard':
-        return <Dashboard />;
+        if (!isAuthenticated) {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <Dashboard onNavigate={setCurrentPage} onLogout={handleLogout} />;
       case 'health-records':
-        return <HealthRecords />;
+        if (!isAuthenticated) {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <HealthRecords onNavigate={setCurrentPage} onLogout={handleLogout} />;
       case 'appointments':
-        return <Appointments />;
+        if (!isAuthenticated) {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <Appointments onNavigate={setCurrentPage} onLogout={handleLogout} />;
       case 'profile':
-        return <Profile />;
+        if (!isAuthenticated) {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <Profile onNavigate={setCurrentPage} onLogout={handleLogout} userRole={userRole} />;
+      
+      // Doctor-only pages
+      case 'doctor-appointments':
+        if (!isAuthenticated || userRole !== 'doctor') {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <DoctorAppointments onNavigate={setCurrentPage} onLogout={handleLogout} />;
+      
       default:
-        return <Login />;
+        return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
     }
   };
 
@@ -34,35 +77,67 @@ function App() {
       {renderPage()}
       
       {/* Simple Navigation for Demo - Remove in production */}
-      <div style={{
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        background: 'white',
-        padding: '15px',
-        borderRadius: '10px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-        zIndex: 1000
-      }}>
-        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '12px' }}>Navigation (Demo)</p>
-        <select 
-          value={currentPage} 
-          onChange={(e) => setCurrentPage(e.target.value)}
-          style={{
-            padding: '8px',
-            borderRadius: '5px',
-            border: '1px solid #ddd',
-            cursor: 'pointer'
-          }}
-        >
-          <option value="login">Login</option>
-          <option value="register">Register</option>
-          <option value="dashboard">Dashboard</option>
-          <option value="health-records">Health Records</option>
-          <option value="appointments">Appointments</option>
-          <option value="profile">Profile</option>
-        </select>
-      </div>
+      {isAuthenticated && (
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          background: 'white',
+          padding: '15px',
+          borderRadius: '10px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          zIndex: 1000
+        }}>
+          <p style={{ margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '12px' }}>
+            Navigation (Demo) - {userRole === 'doctor' ? 'Doctor' : 'Patient'}
+          </p>
+          <select 
+            value={currentPage} 
+            onChange={(e) => setCurrentPage(e.target.value)}
+            style={{
+              padding: '8px',
+              borderRadius: '5px',
+              border: '1px solid #ddd',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            {userRole === 'patient' && (
+              <>
+                <option value="dashboard">Dashboard</option>
+                <option value="health-records">Health Records</option>
+                <option value="appointments">Appointments</option>
+                <option value="profile">Profile</option>
+              </>
+            )}
+            {userRole === 'doctor' && (
+              <>
+                <option value="doctor-appointments">Doctor Dashboard</option>
+                <option value="dashboard">Dashboard</option>
+                <option value="health-records">Health Records</option>
+                <option value="appointments">Appointments</option>
+                <option value="profile">Profile</option>
+              </>
+            )}
+          </select>
+          <button
+            onClick={handleLogout}
+            style={{
+              marginTop: '10px',
+              padding: '8px',
+              background: '#dc3545',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              width: '100%',
+              fontWeight: '500'
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </div>
   );
 }
