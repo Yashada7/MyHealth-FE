@@ -26,11 +26,11 @@ function App() {
       case 'appointments':
         return <Appointments setCurrentPage={setCurrentPage} />;
       case 'profile':
-        return <Profile />;
-        case 'doctor-availability':
-          return <DoctorAvailability />;
-        case 'manage-profile':
-          return <ManageProfile />;
+        return <Profile setCurrentPage={setCurrentPage} />;
+      case 'doctor-availability':
+        return <DoctorAvailability setCurrentPage={setCurrentPage} />;
+      case 'manage-profile':
+        return <ManageProfile setCurrentPage={setCurrentPage} />;
       default:
         return <Login />;
     }
@@ -57,7 +57,7 @@ function App() {
         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
         zIndex: 1000
       }}>
-        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '12px' }}>Navigation (Demo)</p>
+        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '12px' }}>Navigation</p>
         <select 
           value={currentPage} 
           onChange={(e) => setCurrentPage(e.target.value)}
@@ -74,6 +74,8 @@ function App() {
           <option value="health-records">Health Records</option>
           <option value="appointments">Appointments</option>
           <option value="profile">Profile</option>
+          <option value="manage-profile">Manage Profile</option>
+          <option value="doctor-availability">Doctor Availability</option>
         </select>
       </div>
     </div>
