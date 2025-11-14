@@ -13,7 +13,7 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'login':
-        return <Login />;
+        return <Login onLoginSuccess={() => setCurrentPage('dashboard')} onNavigate={(page) => setCurrentPage(page)} />;
       case 'register':
         return <Register />;
       case 'dashboard':
