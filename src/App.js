@@ -13,7 +13,7 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'login':
-        return <Login setCurrentPage={setCurrentPage} />;
+        return <Login onLoginSuccess={() => setCurrentPage('dashboard')} onNavigate={(page) => setCurrentPage(page)} />;
       case 'register':
         return <Register setCurrentPage={setCurrentPage} />;
       case 'dashboard':
@@ -24,10 +24,6 @@ function App() {
         return <Appointments setCurrentPage={setCurrentPage} />;
       case 'profile':
         return <Profile setCurrentPage={setCurrentPage} />;
-      case 'doctor-availability':
-        return <DoctorAvailability setCurrentPage={setCurrentPage} />;
-      case 'manage-profile':
-        return <ManageProfile setCurrentPage={setCurrentPage} />;
       default:
         return <Login />;
     }
