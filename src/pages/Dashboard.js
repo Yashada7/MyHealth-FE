@@ -1,55 +1,65 @@
 import React from 'react';
 import './Dashboard.css';
 
-function Dashboard() {
+const Dashboard = ({ setCurrentPage }) => {
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>MyHealth Dashboard</h1>
-        <button className="btn-logout">Logout</button>
-      </header>
-      
-      <div className="dashboard-content">
-        <div className="stats-grid">
-          <div className="stat-card">
-            <h3>Upcoming Appointments</h3>
-            <p className="stat-number">3</p>
-          </div>
-          <div className="stat-card">
-            <h3>Health Records</h3>
-            <p className="stat-number">12</p>
-          </div>
-          <div className="stat-card">
-            <h3>Prescriptions</h3>
-            <p className="stat-number">5</p>
-          </div>
-          <div className="stat-card">
-            <h3>Lab Reports</h3>
-            <p className="stat-number">8</p>
-          </div>
-        </div>
+    <div className="app">
 
-        <div className="quick-actions">
-          <h2>Quick Actions</h2>
-          <div className="action-buttons">
-            <button className="action-btn">Book Appointment</button>
-            <button className="action-btn">View Records</button>
-            <button className="action-btn">Upload Report</button>
-            <button className="action-btn">Message Doctor</button>
-          </div>
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-overlay">
+          <h1 className="hero-title">HealthCare Appointment Care</h1>
+          <p className="hero-subtitle">Connecting Healthy Environment</p>
         </div>
+      </section>
 
-        <div className="recent-activity">
-          <h2>Recent Activity</h2>
-          <ul className="activity-list">
-            <li>Appointment with Dr. Smith - Tomorrow at 10:00 AM</li>
-            <li>Lab report uploaded - 2 days ago</li>
-            <li>Prescription renewed - 1 week ago</li>
-          </ul>
+      {/* Main Content */}
+      <main className="main-content">
+        <h2 className="section-title">A little about us -</h2>
+
+        <p className="description">
+          No more phone tag with the clinic — our app lets you book, reschedule, and track your health
+          in just a few taps. From appointment reminders to secure access to your medical records,
+          everything you need is right at your fingertips.
+        </p>
+
+        <h3 className="features-title">Explore our features</h3>
+
+        {/* Feature Cards */}
+        <div className="features-grid">
+
+          {/* Appointment Card */}
+          <div
+            className="feature-card"
+            onClick={() => setCurrentPage("appointments")}
+            style={{ cursor: "pointer" }}
+          >
+            <h4>Book an Appointment</h4>
+          </div>
+
+          {/* Notifications */}
+          <div className="feature-card">
+            <h4>Check Notifications</h4>
+          </div>
+
+          {/* Health Records */}
+          <div
+            className="feature-card"
+            onClick={() => setCurrentPage("health-records")}
+            style={{ cursor: "pointer" }}
+          >
+            <h4>Access Medical Record</h4>
+          </div>
+
         </div>
-      </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>© 2025 MyHealth</p>
+      </footer>
     </div>
   );
-}
+};
 
 export default Dashboard;

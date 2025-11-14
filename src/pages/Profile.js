@@ -29,10 +29,10 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <header className="profile-header">
+      {/* <header className="profile-header">
         <h1>My Profile</h1>
         <button className="btn-back">← Back to Dashboard</button>
-      </header>
+      </header> */}
 
       <div className="profile-content">
         <div className="profile-card">
