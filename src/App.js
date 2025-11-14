@@ -8,6 +8,7 @@ import Appointments from './pages/Appointments';
 import Profile from './pages/Profile';
 import DoctorAvailability from './pages/DoctorAvailability';
 import ManageProfile from './pages/ManageProfile';
+import Header from './components/Header';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
