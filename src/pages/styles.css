@@ -1,0 +1,243 @@
+.doctor-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Top Navigation */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pulse {
+  color: red;
+}
+
+.nav-icons .icon {
+  margin-left: 20px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Layout */
+.availability-content {
+  display: flex;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+/* Doctor Card */
+.doctor-card {
+  width: 240px;
+  padding: 20px;
+  border-radius: 18px;
+  background: #fafafa;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.doctor-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.doctor-name {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.specialization {
+  margin: 5px 0;
+  color: #555;
+}
+
+.patients-box {
+  margin-top: 15px;
+}
+
+.patients-label {
+  font-size: 14px;
+  color: gray;
+}
+
+.patients-count {
+  font-size: 22px;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+/* Calendar Section */
+
+.calendar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Centers horizontally */
+  justify-content: flex-start;
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manage-btn {
+  background: black;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+/* Calendar styling override */
+.custom-calendar {
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  background: transparent;
+}
+
+/* Time Slots */
+
+/* ----- Slot Base Style ----- */
+.slot-box {
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  transition: 0.2s ease;
+}
+
+/* Hover (only for available slots) */
+.slot-box:hover {
+  transform: scale(1.05);
+  background: #e0e0e0;
+}
+
+/* ----- Slot Statuses ----- */
+
+/* Selected (blue) */
+.selected-slot {
+  background: #2563eb !important;
+  color: white !important;
+  border-color: #2563eb !important;
+  font-weight: bold;
+}
+
+/* Booked (red) */
+.booked {
+  background-color: #e57373 !important;
+  color: white !important;
+  cursor: not-allowed !important;
+  border-color: #e57373 !important;
+}
+
+/* Not available (gray) */
+.not-available {
+  background-color: #bdbdbd !important;
+  color: white !important;
+  cursor: not-allowed !important;
+}
+
+/* ----- Slot Index ----- */
+.slot-index {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* ----- Slots Section Layout ----- */
+.slots-section {
+  margin-top: 30px;
+}
+
+.slot-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.date-highlight {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* Manage Profile */
+.profile-wrapper {
+width: 400px;
+margin: 40px auto;
+padding: 30px;
+background: #fff;
+border-radius: 16px;
+border: 1px solid #ccc;
+}
+
+
+.profile-title {
+text-align: center;
+margin-bottom: 20px;
+}
+
+
+.profile-form {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+
+.profile-form input {
+padding: 10px;
+border-radius: 8px;
+border: 1px solid #888;
+}
+
+
+.buttons {
+display: flex;
+justify-content: space-between;
+margin-top: 20px;
+}
+
+
+.cancel-btn,
+.update-btn {
+padding: 10px 20px;
+border-radius: 8px;
+border: none;
+cursor: pointer;
+}
+
+
+.cancel-btn {
+background: #ccc;
+}
+
+
+.update-btn {
+background: #4a73ff;
+color: white;
+}

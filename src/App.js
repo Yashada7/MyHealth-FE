@@ -6,6 +6,9 @@ import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
 import Appointments from './pages/Appointments';
 import Profile from './pages/Profile';
+import DoctorAvailability from './pages/DoctorAvailability';
+import ManageProfile from './pages/ManageProfile';
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -24,8 +27,13 @@ function App() {
         return <Appointments />;
       case 'profile':
         return <Profile />;
+      case 'doctor-availability':
+        return <DoctorAvailability />;
+      case 'manage-profile':
+        return <ManageProfile />;
       default:
         return <Login />;
+
     }
   };
 
@@ -61,6 +69,8 @@ function App() {
           <option value="health-records">Health Records</option>
           <option value="appointments">Appointments</option>
           <option value="profile">Profile</option>
+          <option value="doctor-availability">Doctor Availability</option>
+          <option value="manage-profile">Manage Profile</option>
         </select>
       </div>
     </div>
