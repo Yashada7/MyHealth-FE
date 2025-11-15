@@ -31,7 +31,7 @@ const Dashboard = ({ setCurrentPage }) => {
           {/* Appointment Card */}
           <div
             className="feature-card"
-            onClick={() => setCurrentPage("appointments")}
+            onClick={() => setCurrentPage("book-appointment")}
             style={{ cursor: "pointer" }}
           >
             <h4>Book an Appointment</h4>

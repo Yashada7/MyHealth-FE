@@ -5,6 +5,7 @@ function Login({ onNavigate, onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [currentPage,setCurrentPage] = useState('login')
 
   // Test credentials
   const TEST_PATIENT_EMAIL = 'patient@myhealth.com';
