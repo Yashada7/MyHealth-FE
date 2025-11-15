@@ -119,5 +119,6 @@ git branch -d feature/new-feature
 
 
 ```
-Use patient@myhealth.com for Patient or doctor@myhealth.com for Doctor 
+Use patient@myhealth.com for Patient or doctor@myhealth.com for Doctor
+ remove this description 
 ```
