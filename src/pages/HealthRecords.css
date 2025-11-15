@@ -1,149 +1,241 @@
-.health-records-container {
-  min-height: 100vh;
-  background: #f5f7fa;
-}
-
-.records-header {
-  background: white;
-  padding: 20px 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.records-header h1 {
-  color: #667eea;
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.btn-back {
-  padding: 10px 20px;
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.btn-back:hover {
-  background: #5568d3;
+.medical-records-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
 }
 
-.records-content {
-  padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.records-actions {
+/* Header Styles */
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  gap: 20px;
+  padding: 1rem 2rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-upload {
-  padding: 12px 24px;
-  background: #10ac84;
-  color: white;
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.heartbeat {
+  color: #e74c3c;
+  font-size: 1.75rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.nav-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon-btn {
+  background: none;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 16px;
+  padding: 0.5rem;
+  color: #555;
+  transition: color 0.3s ease;
 }
 
-.btn-upload:hover {
-  background: #0e9c74;
+.icon-btn:hover {
+  color: #007bff;
 }
 
-.search-input {
+/* Main Container */
+.main-container {
   flex: 1;
-  max-width: 400px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: #667eea;
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 1rem;
 }
 
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+  font-size: 1rem;
+  color: #666;
+  background-color: white;
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Records Grid */
 .records-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .record-card {
   background: white;
-  padding: 25px;
-  border-radius: 10px;
+  border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.record-type {
-  display: inline-block;
-  padding: 5px 12px;
-  background: #667eea;
-  color: white;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.record-card h3 {
-  margin: 10px 0;
-  color: #333;
-}
-
-.record-info {
-  color: #666;
-  font-size: 14px;
-  margin: 15px 0;
-}
-
-.record-info span {
-  display: block;
-  margin: 5px 0;
-}
-
-.record-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.btn-view,
-.btn-download {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+}
+
+.record-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.record-image {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.record-image svg {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.record-card:hover .record-image svg {
+  opacity: 1;
+}
+
+.record-content {
+  padding: 1.5rem;
+  background-color: white;
+}
+
+.record-title {
+  font-size: 1.25rem;
   font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
-.btn-view {
-  background: #667eea;
-  color: white;
+.record-description {
+  font-size: 0.95rem;
+  color: #777;
 }
 
-.btn-view:hover {
-  background: #5568d3;
+/* Footer */
+.footer {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto;
 }
 
-.btn-download {
-  background: #e8eaf6;
-  color: #667eea;
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
 }
 
-.btn-download:hover {
-  background: #d1d5f0;
+.social-link {
+  color: #555;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link:hover {
+  color: #007bff;
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .nav-icons {
+    gap: 0.5rem;
+  }
+
+  .main-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .welcome-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+
+  .records-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .record-image {
+    height: 180px;
+  }
+
+  .record-image svg {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .records-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

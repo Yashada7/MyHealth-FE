@@ -44,15 +44,15 @@ function App() {
       
       case 'dashboard':
         if (!isAuthenticated) {
-          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+          return <Login setCurrentPage={setCurrentPage} onLogin={handleLogin} />;
         }
-        return <Dashboard onNavigate={setCurrentPage} onLogout={handleLogout} />;
+        return <Dashboard setCurrentPage={setCurrentPage} onLogout={handleLogout} />;
 
       case 'health-records':
         if (!isAuthenticated) {
           return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
         }
-        return <HealthRecords onNavigate={setCurrentPage} onLogout={handleLogout} />;
+        return <HealthRecords setCurrentPage={setCurrentPage} onLogout={handleLogout} />;
 
       case 'doctor-appointments':
         if (!isAuthenticated) {

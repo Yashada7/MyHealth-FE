@@ -5,6 +5,7 @@ function Login({ onNavigate, onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [currentPage,setCurrentPage] = useState('login')
 
   // Test credentials
   const TEST_PATIENT_EMAIL = 'patient@myhealth.com';
@@ -44,6 +45,16 @@ function Login({ onNavigate, onLogin }) {
     
     // Successful login
     onLogin(userRole);
+
+    // You can add real validation later
+    if (email.trim() && password.trim()) {
+      console.log('Login successful:', { email, password });
+
+      // Navigate to Dashboard
+      setCurrentPage("dashboard");   // <-- MAIN FIX
+    } else {
+      alert("Please enter both email and password");
+    }
   };
 
   return (
@@ -70,6 +81,7 @@ function Login({ onNavigate, onLogin }) {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -81,8 +93,10 @@ function Login({ onNavigate, onLogin }) {
               required
             />
           </div>
+
           <button type="submit" className="btn-primary">Login</button>
         </form>
+
         <p className="signup-link">
           Don't have an account? <a href="#register" onClick={(e) => { e.preventDefault(); onNavigate('register'); }}>Sign up</a>
         </p>
