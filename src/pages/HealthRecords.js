@@ -27,6 +27,26 @@ const HealthRecords = () => {
   ];
 
   return (
+    <div className="health-records-container">
+
+      <div className="records-content">
+        <div className="records-actions">
+          <button className="btn-upload">+ Upload New Record</button>
+          <input type="text" placeholder="Search records..." className="search-input" />
+        </div>
+
+        <div className="records-grid">
+          {records.map(record => (
+            <div key={record.id} className="record-card">
+              <div className="record-type">{record.type}</div>
+              <h3>{record.title}</h3>
+              <p className="record-info">
+                <span>Date: {record.date}</span>
+                <span>Doctor: {record.doctor}</span>
+              </p>
+              <div className="record-actions">
+                <button className="btn-view">View</button>
+                <button className="btn-download">Download</button>
     <div className="medical-records-app">
 
       {/* Main Content */}

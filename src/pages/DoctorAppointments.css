@@ -1,0 +1,316 @@
+.appointments-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.appointments-header {
+  background: white;
+  padding: 20px 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appointments-header h1 {
+  color: #667eea;
+  margin: 0;
+}
+
+/* Success Alert Styles */
+.success-alert {
+  background: #10ac84;
+  color: white;
+  padding: 16px 20px;
+  margin: 20px 40px 0 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(16, 172, 132, 0.2);
+  animation: slideDown 0.3s ease-out;
+}
+
+.success-icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.btn-back {
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-back:hover {
+  background: black;
+}
+
+.appointments-content {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.btn-new-appointment {
+  padding: 15px 30px;
+  background: #10ac84;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.btn-new-appointment:hover {
+  background: #0e9c74;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appointment-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid red;
+}
+
+.appointment-card.completed {
+  border-left-color: green;
+  opacity: 0.8;
+}
+
+.appointment-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.doctor-info h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.specialty {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.appointment-details {
+  text-align: right;
+}
+
+.date-time {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.upcoming {
+  background: whitesmoke;
+  color: red;
+}
+
+.status-badge.completed {
+  background: whitesmoke;
+  color: green;
+}
+
+.appointment-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-reschedule,
+.btn-cancel,
+.btn-view-notes {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-reschedule {
+  background: black;
+  color: white;
+}
+
+.btn-reschedule:hover {
+  background: black;
+}
+
+.btn-cancel {
+  background: #ff4757;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #ee5a6f;
+}
+
+.btn-view-notes {
+  background: black;
+  color: white;
+}
+
+.btn-view-notes:hover {
+  background: black;
+}
+
+@media (max-width: 768px) {
+  .appointment-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .appointment-details {
+    text-align: left;
+  }
+}
+
+/* Modal Styles for Cancel Confirmation */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.modal-content p {
+  color: #666;
+  margin: 15px 0 25px 0;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-confirm {
+  padding: 10px 20px;
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-confirm:hover {
+  background: #ee5a6f;
+}
+
+.btn-cancel-modal {
+  padding: 10px 20px;
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cancel-modal:hover {
+  background: #d0d0d0;
+}
+
+/* Close Button */
+.btn-close {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-close:hover {
+  background: #5568d3;
+}
+
+/* Notes Display */
+.notes-text {
+  background: #f5f7fa;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 3px solid black;
+  margin: 8px 0 !important;
+  color: #555;
+}
+
+/* Increase modal content width for better display */
+.modal-content {
+  max-width: 500px;
+}
