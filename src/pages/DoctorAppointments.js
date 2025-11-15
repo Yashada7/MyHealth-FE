@@ -16,7 +16,7 @@ function DoctorAppointments({ setCurrentPage }) {
   const [notesAppointment, setNotesAppointment] = useState(null);
 
   const handleBookNewAppointment = () => {
-    if (setCurrentPage) setCurrentPage('doctor-availability');
+    if (setCurrentPage) setCurrentPage('book-appointment');
   };
 
   const handleCancelClick = (appointmentId) => {
@@ -55,13 +55,17 @@ function DoctorAppointments({ setCurrentPage }) {
 
   return (
     <div className="appointments-container">
-
       {successMessage && (
         <div className="success-alert">
           <span className="success-icon">✓</span>
           {successMessage}
         </div>
       )}
+
+      <header className="records-header">
+        <h1>Doctor Appointments</h1>
+        <button className="btn-back">← Back to Dashboard</button>
+      </header>
 
       <div className="appointments-content">
         <button className="btn-new-appointment" onClick={handleBookNewAppointment}>+ Book New Appointment</button>
