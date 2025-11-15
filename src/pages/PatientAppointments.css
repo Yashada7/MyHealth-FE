@@ -156,8 +156,9 @@
   gap: 10px;
 }
 
-.btn-reschedule,
+.btn-patient-information,
 .btn-cancel,
+.btn-patient-files,
 .btn-view-notes {
   padding: 10px 20px;
   border: none;
@@ -166,13 +167,22 @@
   font-weight: 600;
 }
 
-.btn-reschedule {
+.btn-patient-information {
   background: black;
   color: white;
 }
 
-.btn-reschedule:hover {
+.btn-patient-information:hover {
   background: black;
+}
+
+.btn-patient-files {
+  background: #e8eaf6;
+  color: black;
+}
+
+.btn-patient-files:hover {
+  background: #d1d5f0;
 }
 
 .btn-cancel {
@@ -285,6 +295,36 @@
   background: #d0d0d0;
 }
 
+/* Form Group Styles */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
 /* Close Button */
 .btn-close {
   padding: 10px 20px;
@@ -300,6 +340,21 @@
   background: #5568d3;
 }
 
+/* Save Button */
+.btn-save {
+  padding: 10px 20px;
+  background: #10ac84;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-save:hover {
+  background: #0e9c74;
+}
+
 /* Notes Display */
 .notes-text {
   background: #f5f7fa;
@@ -310,7 +365,7 @@
   color: #555;
 }
 
-/* Increase modal content width for better display */
+/* Increase modal content width for larger forms */
 .modal-content {
   max-width: 500px;
 }

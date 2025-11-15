@@ -11,10 +11,6 @@ function HealthRecords() {
 
   return (
     <div className="health-records-container">
-      <header className="records-header">
-        <h1>Health Records</h1>
-        <button className="btn-back">← Back to Dashboard</button>
-      </header>
 
       <div className="records-content">
         <div className="records-actions">

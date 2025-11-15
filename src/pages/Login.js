@@ -4,28 +4,46 @@ import './Login.css';
 function Login({ onNavigate, onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   // Test credentials
   const TEST_PATIENT_EMAIL = 'patient@myhealth.com';
   const TEST_DOCTOR_EMAIL = 'doctor@myhealth.com';
+  const TEST_PASSWORD = 'password123';
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setError('');
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setError('');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Validate against test credentials only
+    const validEmails = [TEST_PATIENT_EMAIL, TEST_DOCTOR_EMAIL];
+    
+    if (!validEmails.includes(email)) {
+      setError('Invalid email. Use patient@myhealth.com or doctor@myhealth.com');
+      return;
+    }
+    
+    if (password !== TEST_PASSWORD) {
+      setError('Invalid password. Use password123');
+      return;
+    }
+    
     // Determine role based on email
-    let userRole = 'patient'; // Default role
-    if (email === TEST_DOCTOR_EMAIL) {
-      userRole = 'doctor';
-    } else if (email === TEST_PATIENT_EMAIL) {
-      userRole = 'patient';
-    }
+    let userRole = email === TEST_DOCTOR_EMAIL ? 'doctor' : 'patient';
     
-    console.log('Login attempt:', { email, password, role: userRole });
+    console.log('Login successful:', { email, role: userRole });
     
-    // Simulate successful login
-    if (email && password) {
-      onLogin(userRole); // Pass the determined role to App
-    }
+    // Successful login
+    onLogin(userRole);
   };
 
   return (
@@ -33,6 +51,13 @@ function Login({ onNavigate, onLogin }) {
       <div className="login-card">
         <h1>MyHealth ❤️</h1>
         <h2>Login</h2>
+
+        {error && (
+          <div className="login-error" role="alert" aria-live="assertive" style={{ color: '#b00020', marginBottom: '12px' }}>
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -40,7 +65,7 @@ function Login({ onNavigate, onLogin }) {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               placeholder="Enter your email"
               required
             />
@@ -51,7 +76,7 @@ function Login({ onNavigate, onLogin }) {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               placeholder="Enter your password"
               required
             />

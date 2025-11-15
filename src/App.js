@@ -4,9 +4,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import HealthRecords from './pages/HealthRecords';
-import Appointments from './pages/Appointments';
-import Profile from './pages/Profile';
 import DoctorAppointments from './pages/DoctorAppointments';
+import BookAppointment from './pages/BookAppointment';
+import Profile from './pages/Profile';
+import PatientAppointments from './pages/PatientAppointments';
+import Header from './components/Header';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -18,7 +20,7 @@ function App() {
     setUserRole(role);
     setIsAuthenticated(true);
     if (role === 'doctor') {
-      setCurrentPage('doctor-appointments');
+      setCurrentPage('patient-appointments');
     } else {
       setCurrentPage('dashboard');
     }
@@ -33,39 +35,48 @@ function App() {
 
   const renderPage = () => {
     switch (currentPage) {
+
       case 'login':
-        return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        return <Login onLogin={handleLogin} onNavigate={(page) => setCurrentPage(page)} />;
+
       case 'register':
         return <Register onNavigate={setCurrentPage} />;
       
-      // Pages accessible by both patients and doctors
       case 'dashboard':
         if (!isAuthenticated) {
           return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
         }
         return <Dashboard onNavigate={setCurrentPage} onLogout={handleLogout} />;
+
       case 'health-records':
         if (!isAuthenticated) {
           return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
         }
         return <HealthRecords onNavigate={setCurrentPage} onLogout={handleLogout} />;
-      case 'appointments':
+
+      case 'doctor-appointments':
         if (!isAuthenticated) {
           return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
         }
-        return <Appointments onNavigate={setCurrentPage} onLogout={handleLogout} />;
+        return <DoctorAppointments setCurrentPage={setCurrentPage} />;
+
+      case 'book-appointment':
+        if (!isAuthenticated) {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <BookAppointment setCurrentPage={setCurrentPage} />;
+
+      case 'patient-appointments':
+        if (!isAuthenticated) {
+          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
+        }
+        return <PatientAppointments setCurrentPage={setCurrentPage} />;
+
       case 'profile':
         if (!isAuthenticated) {
           return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
         }
         return <Profile onNavigate={setCurrentPage} onLogout={handleLogout} userRole={userRole} />;
-      
-      // Doctor-only pages
-      case 'doctor-appointments':
-        if (!isAuthenticated || userRole !== 'doctor') {
-          return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
-        }
-        return <DoctorAppointments onNavigate={setCurrentPage} onLogout={handleLogout} />;
       
       default:
         return <Login onNavigate={setCurrentPage} onLogin={handleLogin} />;
@@ -74,6 +85,12 @@ function App() {
 
   return (
     <div className="App">
+      
+      {/* Show header on all pages EXCEPT login & register */}
+      {currentPage !== "login" && currentPage !== "register" && (
+        <Header setCurrentPage={setCurrentPage} />
+      )}
+
       {renderPage()}
       
       {/* Simple Navigation for Demo - Remove in production */}
@@ -106,16 +123,16 @@ function App() {
               <>
                 <option value="dashboard">Dashboard</option>
                 <option value="health-records">Health Records</option>
-                <option value="appointments">Appointments</option>
+                <option value="doctor-appointments">Doctor Appointments</option>
+                <option value="book-appointment">Book Appointment</option>
                 <option value="profile">Profile</option>
               </>
             )}
             {userRole === 'doctor' && (
               <>
-                <option value="doctor-appointments">Doctor Dashboard</option>
                 <option value="dashboard">Dashboard</option>
                 <option value="health-records">Health Records</option>
-                <option value="appointments">Appointments</option>
+                <option value="patient-appointments">Patient Appointments</option>
                 <option value="profile">Profile</option>
               </>
             )}

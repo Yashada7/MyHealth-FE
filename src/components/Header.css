@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background: #0d7e88; */
+  padding: 15px 25px;
+  color: black;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.heartbeat {
+  color: #ff4d4d;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.icon-btn svg {
+  stroke: black;
+}
+
+.icon-btn:hover {
+  opacity: 0.8;
+}
