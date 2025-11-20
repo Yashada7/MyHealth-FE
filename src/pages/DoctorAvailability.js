@@ -3,9 +3,48 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./styles.css";
 
+// ----------------- DoctorCard Component -----------------
+function DoctorCard({ doctor }) {
+  return (
+    <div className="doctor-card">
+      <img className="doctor-img" src={doctor.img} alt="doctor" />
+      <h3 className="doctor-name">{doctor.name}</h3>
+      <p className="specialization">{doctor.specialization}</p>
+      <div className="patients-box">
+        <p className="patients-label">Patients</p>
+        <p className="patients-count">{doctor.patients}</p>
+      </div>
+    </div>
+  );
+}
+
+// ----------------- TimeSlot Component -----------------
+function TimeSlot({ slot, index, selectedSlot, onSelect, bookedSlots, selectedDate }) {
+  const isAvailable = slot.status === "available" &&
+    !bookedSlots.some(
+      b => b.date === selectedDate.toDateString() && b.slot === slot.time
+    );
+
+  return (
+    <div
+      onClick={() => isAvailable && onSelect(slot.time)}
+      className={`slot-box
+        ${selectedSlot === slot.time ? "selected-slot" : ""}
+        ${slot.status === "booked" || !isAvailable ? "booked" : ""}
+        ${slot.status === "not-available" ? "not-available" : ""}`}
+    >
+      <span className="slot-index">{index + 1}.</span> {slot.time}
+    </div>
+  );
+}
+
+// ----------------- Main Component -----------------
 function DoctorAvailability() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [bookedSlots, setBookedSlots] = useState(() => {
+    return JSON.parse(localStorage.getItem("bookedSlots")) || [];
+  });
 
   // Example time slots
   const timeSlots = [
@@ -26,20 +65,15 @@ function DoctorAvailability() {
     setSelectedSlot(null);
   };
 
-  // BOOKING HANDLER — This is the new code you wanted
   const handleBookSlot = () => {
     if (!selectedSlot) return;
 
-    // Save the booked slot
-    const booking = {
-      date: selectedDate.toDateString(),
-      slot: selectedSlot,
-    };
+    const booking = { date: selectedDate.toDateString(), slot: selectedSlot };
+    const updated = [...bookedSlots, booking];
+    setBookedSlots(updated);
+    localStorage.setItem("bookedSlots", JSON.stringify(updated));
 
-    localStorage.setItem("bookedSlot", JSON.stringify(booking));
-
-    // Navigate WITHOUT React Router
-    window.location.href = "/manage-availability.html"; 
+    window.location.href = "/manage-availability.html";
   };
 
   return (
@@ -47,20 +81,14 @@ function DoctorAvailability() {
       <div className="availability-content">
 
         {/* Doctor Card */}
-        <div className="doctor-card">
-          <img
-            className="doctor-img"
-            src="/Profilepic.jpeg"
-            alt="doctor"
-          />
-          <h3 className="doctor-name">Dr. Nidhi Musale</h3>
-          <p className="specialization">General Medicine</p>
-
-          <div className="patients-box">
-            <p className="patients-label">Patients</p>
-            <p className="patients-count">584</p>
-          </div>
-        </div>
+        <DoctorCard
+          doctor={{
+            img: "/Profilepic.jpeg",
+            name: "Dr. Nidhi Musale",
+            specialization: "General Medicine",
+            patients: 584,
+          }}
+        />
 
         {/* Calendar + Slots */}
         <div className="calendar-section">
@@ -77,44 +105,27 @@ function DoctorAvailability() {
           {/* Time Slots */}
           <div className="slots-section">
             <h3 className="slot-title">
-              Available Slots on 
-              <span className="date-highlight"> {selectedDate.toDateString()}</span>
+              Available Slots on{" "}
+              <span className="date-highlight">{selectedDate.toDateString()}</span>
             </h3>
 
             <div className="slots-grid">
               {timeSlots.map((slot, index) => (
-                <div
+                <TimeSlot
                   key={slot.time}
-                  onClick={() =>
-                    slot.status === "available" && setSelectedSlot(slot.time)
-                  }
-                  className={`slot-box 
-                    ${selectedSlot === slot.time ? "selected-slot" : ""} 
-                    ${slot.status === "booked" ? "booked" : ""} 
-                    ${slot.status === "not-available" ? "not-available" : ""}`}
-                >
-                  <span className="slot-index">{index + 1}.</span> {slot.time}
-                </div>
+                  slot={slot}
+                  index={index}
+                  selectedSlot={selectedSlot}
+                  onSelect={setSelectedSlot}
+                  bookedSlots={bookedSlots}
+                  selectedDate={selectedDate}
+                />
               ))}
             </div>
 
-            {/* SLOT BOOKED BUTTON — only shows when a valid slot is picked */}
+            {/* Slot Booked Button */}
             {selectedSlot && (
-              <button
-                onClick={handleBookSlot}
-                style={{
-                  marginTop: "20px",
-                  padding: "12px 20px",
-                  background: "#2563eb",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  width: "200px"
-                }}
-              >
+              <button className="slot-booked-btn" onClick={handleBookSlot}>
                 Slot Booked
               </button>
             )}

@@ -1,61 +1,131 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-export function ManageProfile() {
-  const [profileImage, setProfileImage] = useState("/default-profile.jpg");
+// ---------------------- Reusable Form Field ----------------------
+function FormField({ label, value, onChange, type = "text", placeholder }) {
+  return (
+    <>
+      <label>{label}</label>
+      <input
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </>
+  );
+}
 
-  // When user uploads an image → preview it instantly
+// ---------------------- Profile Image Component ----------------------
+function ProfileImageSection({ profileImage, onImageSelect }) {
+  return (
+    <div className="profile-image-section">
+      <img src={profileImage} alt="Profile" className="profile-photo" />
+
+      <label className="upload-btn">
+        Change Photo
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onImageSelect}
+          className="hidden-input"
+        />
+      </label>
+    </div>
+  );
+}
+
+// ---------------------- Main Component ----------------------
+export function ManageProfile() {
+  const [profileImage, setProfileImage] = useState("/Profilepic.jpeg");
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    emergencyName: "",
+    emergencyPhone: "",
+    relationship: "",
+  });
+
+  // Handle image upload preview
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+      const url = URL.createObjectURL(file);
+      setProfileImage(url);
     }
+  };
+
+  // Helper to update any form field
+  const updateField = (key, value) => {
+    setForm({ ...form, [key]: value });
   };
 
   return (
     <div className="page-container profile-page">
       <div className="profile-wrapper">
-
         <h2 className="profile-title">Manage Profile</h2>
 
-        {/* Profile Image Section */}
-        <div className="profile-image-section">
-          <img src="/Profilepic.jpeg" alt="Profile" className="profile-photo" />
-
-          <label className="upload-btn">
-            Change Photo
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: "none" }}
-            />
-          </label>
-        </div>
+        {/* Profile Picture */}
+        <ProfileImageSection
+          profileImage={profileImage}
+          onImageSelect={handleImageChange}
+        />
 
         {/* Form */}
         <form className="profile-form">
-          <label>Full Name</label>
-          <input type="text" placeholder="Rinkiya Gundu" />
+          <FormField
+            label="Full Name"
+            value={form.name}
+            placeholder="Your Full Name"
+            onChange={(v) => updateField("name", v)}
+          />
 
-          <label>Email</label>
-          <input type="email" placeholder="gundu03@xyz.edu" />
+          <FormField
+            label="Email"
+            type="email"
+            value={form.email}
+            placeholder="your@email.com"
+            onChange={(v) => updateField("email", v)}
+          />
 
-          <label>Password</label>
-          <input type="password" placeholder="************" />
+          <FormField
+            label="Password"
+            type="password"
+            value={form.password}
+            placeholder="********"
+            onChange={(v) => updateField("password", v)}
+          />
 
-          <label>Phone Number</label>
-          <input type="text" placeholder="+1 (123) 456-7890" />
+          <FormField
+            label="Phone Number"
+            value={form.phone}
+            placeholder="+1 (123) 456-7890"
+            onChange={(v) => updateField("phone", v)}
+          />
 
-          <label>Emergency Contact Name</label>
-          <input type="text" placeholder="Bharathwaj N" />
+          <FormField
+            label="Emergency Contact Name"
+            value={form.emergencyName}
+            placeholder="Contact Name"
+            onChange={(v) => updateField("emergencyName", v)}
+          />
 
-          <label>Emergency Contact Phone</label>
-          <input type="text" placeholder="+1 (123) 456-7890" />
+          <FormField
+            label="Emergency Contact Phone"
+            value={form.emergencyPhone}
+            placeholder="+1 (123) 456-7890"
+            onChange={(v) => updateField("emergencyPhone", v)}
+          />
 
-          <label>Relationship</label>
-          <input type="text" placeholder="Brother" />
+          <FormField
+            label="Relationship"
+            value={form.relationship}
+            placeholder="Father, Mother, Brother..."
+            onChange={(v) => updateField("relationship", v)}
+          />
 
           <div className="buttons">
             <button type="button" className="cancel-btn">Cancel</button>
